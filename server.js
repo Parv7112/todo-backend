@@ -2,10 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const connectDB = require('./src/config/db');
-// const todoRoutes = require('./src/routes/todoRoutes');
-const todoRoutes= require('./src/routes/todo.routes');
-
-
+const todoRoutes = require('./src/routes/todo.routes');
+const authRoutes = require('./src/routes/auth.routes');
 
 // Load environment variables from .env
 dotenv.config();
@@ -19,13 +17,14 @@ const app = express();
 app.use(cors());
 app.use(express.json()); // parse incoming JSON data
 
- //Routes
- app.use('/api/todos', todoRoutes);
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/todos', todoRoutes);
 
 // Root endpoint (for testing)
-// app.get('/', (req, res) => {
-//   res.send('✅ To-Do List Backend is running...');
-// });
+app.get('/', (req, res) => {
+  res.send('✅ TaskTrack Backend is running...');
+});
 
 // Start server
 const PORT = process.env.PORT || 5000;
