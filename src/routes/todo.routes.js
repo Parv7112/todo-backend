@@ -2,6 +2,10 @@
 const express = require('express');
 const router = express.Router();
 const todoController = require('../controllers/todo.controller');
+const auth = require('../middleware/auth.middleware');
+
+// All todo routes require authentication
+router.use(auth);
 
 router.post('/', todoController.createTodo);
 router.get('/', todoController.getTodos);
