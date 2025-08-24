@@ -14,6 +14,25 @@ const todoSchema = new mongoose.Schema({
   completed: {
     type: Boolean,
     default: false
+  },
+  status: {
+    type: String,
+    enum: ['todo', 'inprogress', 'review', 'completed'],
+    default: 'todo'
+  },
+  priority: {
+    type: String,
+    enum: ['lowest', 'low', 'medium', 'high', 'highest'],
+    default: 'medium'
+  },
+  dueDate: {
+    type: Date,
+    default: null
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: [true, 'User is required']
   }
 }, {
   timestamps: true
